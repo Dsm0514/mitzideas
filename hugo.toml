@@ -16,6 +16,8 @@ canonifyURLs = true
 
   [params.comments]
     enable = false
+  
+  custom_css = ["css/custom.css"]
 
 [languages]
   [languages."pt-br"]
