@@ -1,6 +1,5 @@
 baseURL = "https://dsm0514.github.io/mitzideas/"
 title = "MitzIdeas"
-theme = "hextra"
 defaultContentLanguage = "pt-br"
 defaultContentLanguageInSubdir = false
 canonifyURLs = true
