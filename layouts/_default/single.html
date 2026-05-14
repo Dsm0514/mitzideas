@@ -1,0 +1,44 @@
+{{ define "main" }}
+<article>
+  <div class="post-header">
+
+    <a href="{{ .Site.Home.RelPermalink }}" class="back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      {{ if eq .Site.Language.Lang "pt-br" }}Voltar
+      {{ else if eq .Site.Language.Lang "es" }}Volver
+      {{ else if eq .Site.Language.Lang "fr" }}Retour
+      {{ else if eq .Site.Language.Lang "de" }}Zurück
+      {{ else }}Back{{ end }}
+    </a>
+
+    <h1>{{ .Title }}</h1>
+
+    <div class="post-meta">
+      {{ $dateCtx := dict "Date" .Date "Lang" .Site.Language.Lang }}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ partial "date-i18n.html" $dateCtx }}
+      </time>
+      {{ with .Params.categories }}
+      <span class="post-meta-dot">·</span>
+      <span>
+        {{ range . }}
+        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}/" style="color: var(--accent)">{{ . }}</a>
+        {{ end }}
+      </span>
+      {{ end }}
+      {{ with .Params.series }}
+      <span class="post-meta-dot">·</span>
+      <span>
+        {{ range . }}
+        <a href="{{ "/series/" | relLangURL }}{{ . | urlize }}/" style="color: var(--text-muted)">📚 {{ . }}</a>
+        {{ end }}
+      </span>
+      {{ end }}
+    </div>
+  </div>
+
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

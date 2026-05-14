@@ -1,0 +1,30 @@
+[about]
+other = "Über mich"
+[search_placeholder]
+other = "Beiträge suchen..."
+[all_categories]
+other = "Alle Kategorien"
+[all_series]
+other = "Alle Serien"
+[all_years]
+other = "Alle Jahre"
+[no_results]
+other = "Keine Beiträge für diese Suche gefunden."
+[category_label]
+other = "Kategorie"
+[series_label]
+other = "Serie"
+[year_label]
+other = "Jahr"
+[posts_count]
+other = "von"
+[posts_label]
+other = "Beiträgen"
+[theme_light]
+other = "Hell"
+[theme_dark]
+other = "Dunkel"
+[theme_system]
+other = "System"
+[theme_title]
+other = "Thema"

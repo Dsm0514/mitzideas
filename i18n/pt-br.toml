@@ -1,0 +1,30 @@
+[about]
+other = "Sobre"
+[search_placeholder]
+other = "Buscar posts..."
+[all_categories]
+other = "Todas as categorias"
+[all_series]
+other = "Todas as séries"
+[all_years]
+other = "Todos os anos"
+[no_results]
+other = "Nenhum post encontrado para essa busca."
+[category_label]
+other = "Categoria"
+[series_label]
+other = "Série"
+[year_label]
+other = "Ano"
+[posts_count]
+other = "de"
+[posts_label]
+other = "posts"
+[theme_light]
+other = "Claro"
+[theme_dark]
+other = "Escuro"
+[theme_system]
+other = "Sistema"
+[theme_title]
+other = "Tema"

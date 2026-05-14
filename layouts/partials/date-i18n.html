@@ -1,0 +1,50 @@
+{{- $day := .Date.Format "02" -}}
+{{- $monthEn := .Date.Format "January" -}}
+{{- $year := .Date.Format "2006" -}}
+{{- $lang := .Lang -}}
+
+{{- $months := dict
+  "pt-br" (dict
+    "January" "Janeiro" "February" "Fevereiro" "March" "Março"
+    "April" "Abril" "May" "Maio" "June" "Junho"
+    "July" "Julho" "August" "Agosto" "September" "Setembro"
+    "October" "Outubro" "November" "Novembro" "December" "Dezembro"
+  )
+  "en" (dict
+    "January" "January" "February" "February" "March" "March"
+    "April" "April" "May" "May" "June" "June"
+    "July" "July" "August" "August" "September" "September"
+    "October" "October" "November" "November" "December" "December"
+  )
+  "es" (dict
+    "January" "enero" "February" "febrero" "March" "marzo"
+    "April" "abril" "May" "mayo" "June" "junio"
+    "July" "julio" "August" "agosto" "September" "septiembre"
+    "October" "octubre" "November" "noviembre" "December" "diciembre"
+  )
+  "fr" (dict
+    "January" "janvier" "February" "février" "March" "mars"
+    "April" "avril" "May" "mai" "June" "juin"
+    "July" "juillet" "August" "août" "September" "septembre"
+    "October" "octobre" "November" "novembre" "December" "décembre"
+  )
+  "de" (dict
+    "January" "Januar" "February" "Februar" "March" "März"
+    "April" "April" "May" "Mai" "June" "Juni"
+    "July" "Juli" "August" "August" "September" "September"
+    "October" "Oktober" "November" "November" "December" "Dezember"
+  )
+-}}
+
+{{- $formats := dict
+  "pt-br" "%s de %s de %s"
+  "en"    "%s %s, %s"
+  "es"    "%s de %s de %s"
+  "fr"    "%s %s %s"
+  "de"    "%s. %s %s"
+-}}
+
+{{- $langMonths := index $months $lang | default (index $months "en") -}}
+{{- $monthTranslated := index $langMonths $monthEn | default $monthEn -}}
+{{- $format := index $formats $lang | default "%s %s %s" -}}
+{{- printf $format $day $monthTranslated $year -}}

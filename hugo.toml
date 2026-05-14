@@ -1,0 +1,92 @@
+baseURL = "https://dsm0514.github.io/mitzideas/"
+title = "MitzIdeas"
+theme = "hextra"
+defaultContentLanguage = "pt-br"
+defaultContentLanguageInSubdir = false
+canonifyURLs = true
+
+[params]
+  description = "Blog de Davi Schmitz — carreira, estudos, hobbies e ideias."
+
+  [params.footer]
+    enable = true
+
+  [params.search]
+    enable = true
+
+  [params.comments]
+    enable = false
+
+[languages]
+  [languages."pt-br"]
+    languageName = "Português"
+    weight = 1
+    title = "MitzIdeas"
+    [languages."pt-br".params]
+      description = "Blog de Davi Schmitz"
+    [languages."pt-br".params.footer]
+      copyright = "© 2026 Davi Schmitz. Todos os direitos reservados."
+
+  [languages.en]
+    languageName = "English"
+    weight = 2
+    title = "MitzIdeas"
+    [languages.en.params]
+      description = "Davi Schmitz's blog"
+    [languages.en.params.footer]
+      copyright = "© 2026 Davi Schmitz. All rights reserved."
+
+  [languages.es]
+    languageName = "Español"
+    weight = 3
+    title = "MitzIdeas"
+    [languages.es.params]
+      description = "Blog de Davi Schmitz"
+    [languages.es.params.footer]
+      copyright = "© 2026 Davi Schmitz. Todos los derechos reservados."
+
+  [languages.fr]
+    languageName = "Français"
+    weight = 4
+    title = "MitzIdeas"
+    [languages.fr.params]
+      description = "Blog de Davi Schmitz"
+    [languages.fr.params.footer]
+      copyright = "© 2026 Davi Schmitz. Tous droits réservés."
+
+  [languages.de]
+    languageName = "Deutsch"
+    weight = 5
+    title = "MitzIdeas"
+    [languages.de.params]
+      description = "Davi Schmitz Blog"
+    [languages.de.params.footer]
+      copyright = "© 2026 Davi Schmitz. Alle Rechte vorbehalten."
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    pageRef = "/posts"
+    weight = 1
+
+  [[menu.main]]
+    name = "Sobre"
+    pageRef = "/about"
+    weight = 2
+
+  [[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/Dsm0514"
+    weight = 3
+    [menu.main.params]
+      icon = "github"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"

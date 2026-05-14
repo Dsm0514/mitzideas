@@ -1,0 +1,30 @@
+[about]
+other = "About"
+[search_placeholder]
+other = "Search posts..."
+[all_categories]
+other = "All categories"
+[all_series]
+other = "All series"
+[all_years]
+other = "All years"
+[no_results]
+other = "No posts found for this search."
+[category_label]
+other = "Category"
+[series_label]
+other = "Series"
+[year_label]
+other = "Year"
+[posts_count]
+other = "of"
+[posts_label]
+other = "posts"
+[theme_light]
+other = "Light"
+[theme_dark]
+other = "Dark"
+[theme_system]
+other = "System"
+[theme_title]
+other = "Theme"
