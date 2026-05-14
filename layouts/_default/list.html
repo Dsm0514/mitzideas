@@ -1,60 +1,47 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" class="{{ if eq (index .Site.Params "defaultTheme" | default "system") "dark" }}dark{{ end }}" id="html-root">
+{{ define "main" }}
+  <div class="post-header">
+    <a href="{{ .Site.Home.RelPermalink }}" class="back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      {{ if eq .Site.Language.Lang "pt-br" }}Início
+      {{ else if eq .Site.Language.Lang "es" }}Inicio
+      {{ else if eq .Site.Language.Lang "fr" }}Accueil
+      {{ else if eq .Site.Language.Lang "de" }}Startseite
+      {{ else }}Home{{ end }}
+    </a>
+    
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}<div class="post-meta">{{ . }}</div>{{ end }}
+  </div>
 
-{{ partial "head.html" . }}
-
-<body>
-  {{ partial "header.html" . }}
-
-  <main>
-    <div class="post-header">
-      <a href="{{ .Site.Home.RelPermalink }}" class="back-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-        {{ if eq .Site.Language.Lang "pt-br" }}Início
-        {{ else if eq .Site.Language.Lang "es" }}Inicio
-        {{ else if eq .Site.Language.Lang "fr" }}Accueil
-        {{ else if eq .Site.Language.Lang "de" }}Startseite
-        {{ else }}Home{{ end }}
-      </a>
+  <div class="posts-section">
+    {{ range .Pages.GroupByDate "January 2006" }}
+      {{- $parts := split .Key " " -}}
+      {{- $monthEn := index $parts 0 -}}
+      {{- $year := index $parts 1 -}}
+      {{- $lang := $.Site.Language.Lang -}}
       
-      <h1>{{ .Title }}</h1>
-      {{ with .Content }}<div class="post-meta">{{ . }}</div>{{ end }}
-    </div>
+      {{- $monthsPT := dict "January" "Janeiro" "February" "Fevereiro" "March" "Março" "April" "Abril" "May" "Maio" "June" "Junho" "July" "Julho" "August" "Agosto" "September" "Setembro" "October" "Outubro" "November" "Novembro" "December" "Dezembro" -}}
+      {{- $monthsES := dict "January" "Enero" "February" "Febrero" "March" "Marzo" "April" "Abril" "May" "Mayo" "June" "Junio" "July" "Julio" "August" "Agosto" "September" "Septiembre" "October" "Octubre" "November" "Noviembre" "December" "Diciembre" -}}
+      {{- $monthsFR := dict "January" "Janvier" "February" "Février" "March" "Mars" "April" "Avril" "May" "Mai" "June" "Juin" "July" "Juillet" "August" "Août" "September" "Septembre" "October" "Octobre" "November" "Novembre" "December" "Décembre" -}}
+      {{- $monthsDE := dict "January" "Januar" "February" "Februar" "March" "März" "April" "April" "May" "Mai" "June" "Juni" "July" "Juli" "August" "August" "September" "September" "October" "Oktober" "November" "November" "December" "Dezember" -}}
+      
+      {{- $monthName := $monthEn -}}
+      {{- if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthEn }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthEn }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthEn }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthEn }}{{ end -}}
 
-    <div class="posts-section">
-      {{ range .Pages.GroupByDate "January 2006" }}
-        {{- $parts := split .Key " " -}}
-        {{- $monthEn := index $parts 0 -}}
-        {{- $year := index $parts 1 -}}
-        {{- $lang := $.Site.Language.Lang -}}
-        
-        {{/* Dicionários de meses */}}
-        {{- $monthsPT := dict "January" "Janeiro" "February" "Fevereiro" "March" "Março" "April" "Abril" "May" "Maio" "June" "Junho" "July" "Julho" "August" "Agosto" "September" "Setembro" "October" "Outubro" "November" "Novembro" "December" "Dezembro" -}}
-        {{- $monthsES := dict "January" "Enero" "February" "Febrero" "March" "Marzo" "April" "Abril" "May" "Mayo" "June" "Junio" "July" "Julio" "August" "Agosto" "September" "Septiembre" "October" "Octubre" "November" "Noviembre" "December" "Diciembre" -}}
-        {{- $monthsFR := dict "January" "Janvier" "February" "Février" "March" "Mars" "April" "Avril" "May" "Mai" "June" "Juin" "July" "Juillet" "August" "Août" "September" "Septembre" "October" "Octobre" "November" "Novembre" "December" "Décembre" -}}
-        {{- $monthsDE := dict "January" "Januar" "February" "Februar" "March" "März" "April" "April" "May" "Mai" "June" "Juni" "July" "Juli" "August" "August" "September" "September" "October" "Oktober" "November" "November" "December" "Dezember" -}}
-        
-        {{- $monthName := $monthEn -}}
-        {{- if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthEn }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthEn }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthEn }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthEn }}{{ end -}}
-
-        <div class="month-group">
-          <h2 class="month-heading">{{ $monthName }} {{ $year }}</h2>
-          {{ range .Pages }}
-            <div class="post-item">
-              <span class="post-day">{{ .Date.Format "02" }}</span>
-              <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
-              <div class="post-cats">
-                {{ range .Params.categories }}
-                  <span class="post-cat">{{ . }}</span>
-                {{ end }}
-              </div>
+      <div class="month-group">
+        <h2 class="month-heading">{{ $monthName }} {{ $year }}</h2>
+        {{ range .Pages }}
+          <div class="post-item">
+            <span class="post-day">{{ .Date.Format "02" }}</span>
+            <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
+            <div class="post-cats">
+              {{ range .Params.categories }}
+                <span class="post-cat">{{ . }}</span>
+              {{ end }}
             </div>
-          {{ end }}
-        </div>
-      {{ end }}
-    </div>
-  </main>
-
-  {{ partial "footer.html" . }}
-</body>
-</html>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,186 +1,174 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" class="{{ if eq (index .Site.Params "defaultTheme" | default "system") "dark" }}dark{{ end }}" id="html-root">
+{{ define "main" }}
+  <div class="home-hero">
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.description }}</p>
+  </div>
 
-{{ partial "head.html" . }}
-
-<body>
-  {{ partial "header.html" . }}
-
-  <main>
-    <div class="home-hero">
-      <h1>{{ .Site.Title }}</h1>
-      <p>{{ .Site.Params.description }}</p>
+  <div class="search-section">
+    <div class="search-bar">
+      <span class="search-bar-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input type="text" id="search-input" placeholder="{{ T "search_placeholder" }}" autocomplete="off" aria-label="Buscar posts">
+      <button class="search-clear" id="search-clear" aria-label="Limpar busca">✕</button>
     </div>
 
-    <div class="search-section">
-      <div class="search-bar">
-        <span class="search-bar-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </span>
-        <input type="text" id="search-input" placeholder="{{ T "search_placeholder" }}" autocomplete="off" aria-label="Buscar posts">
-        <button class="search-clear" id="search-clear" aria-label="Limpar busca">✕</button>
-      </div>
-
-      <div class="filter-row">
-        <select id="filter-category" class="filter-select" aria-label="{{ T "category_label" }}">
-          <option value="">{{ T "all_categories" }}</option>
-          {{ range .Site.Taxonomies.categories.ByCount }}
-          <option value="{{ .Page.Title }}">{{ .Page.Title }} ({{ .Count }})</option>
-          {{ end }}
-        </select>
-
-        <select id="filter-series" class="filter-select" aria-label="{{ T "series_label" }}">
-          <option value="">{{ T "all_series" }}</option>
-          {{ range .Site.Taxonomies.series.ByCount }}
-          <option value="{{ .Page.Title }}">{{ .Page.Title }} ({{ .Count }})</option>
-          {{ end }}
-        </select>
-
-        <select id="filter-year" class="filter-select" aria-label="{{ T "year_label" }}">
-          <option value="">{{ T "all_years" }}</option>
-          {{ range (.Site.RegularPages.GroupByDate "2006") }}
-          <option value="{{ .Key }}">{{ .Key }}</option>
-          {{ end }}
-        </select>
-      </div>
-
-      <div class="active-filters" id="active-filters"></div>
-      <div class="search-stats" id="search-stats"></div>
-    </div>
-
-    <div class="posts-section" id="posts-container">
-        {{ range (.Site.RegularPages.GroupByDate "January 2006") }}
-        {{- $parts := split .Key " " -}}
-        {{- $monthEn := index $parts 0 -}}
-        {{- $year := index $parts 1 -}}
-        
-        {{- $lang := $.Site.Language.Lang -}}
-        {{- $monthsPT := dict "January" "Janeiro" "February" "Fevereiro" "March" "Março" "April" "Abril" "May" "Maio" "June" "Junho" "July" "Julho" "August" "Agosto" "September" "Setembro" "October" "Outubro" "November" "Novembro" "December" "Dezembro" -}}
-        {{- $monthsES := dict "January" "Enero" "February" "Febrero" "March" "Marzo" "April" "Abril" "May" "Mayo" "June" "Junio" "July" "Julio" "August" "Agosto" "September" "Septiembre" "October" "Octubre" "November" "Noviembre" "December" "Diciembre" -}}
-        {{- $monthsFR := dict "January" "Janvier" "February" "Février" "March" "Mars" "April" "Avril" "May" "Mai" "June" "Juin" "July" "Juillet" "August" "Août" "September" "Septembre" "October" "Octobre" "November" "Novembre" "December" "Décembre" -}}
-        {{- $monthsDE := dict "January" "Januar" "February" "Februar" "March" "März" "April" "April" "May" "Mai" "June" "Juni" "July" "Juli" "August" "August" "September" "September" "October" "Oktober" "November" "November" "December" "Dezember" -}}
-        
-        {{- $monthName := $monthEn -}}
-        {{- if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthEn }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthEn }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthEn }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthEn }}{{ end -}}
-        
-        <div class="month-group" data-month="{{ .Key }}">
-        <h2 class="month-heading">{{ $monthName }} {{ $year }}</h2>
-        {{ range .Pages }}
-        <div class="post-item"
-            data-title="{{ .Title | lower }}"
-            data-categories="{{ range .Params.categories }}{{ . | lower }},{{ end }}"
-            data-series="{{ range .Params.series }}{{ . | lower }},{{ end }}"
-            data-year="{{ .Date.Format "2006" }}"
-            data-date="{{ .Date.Format "2006-01-02" }}">
-            <span class="post-day">{{ .Date.Format "02" }}</span>
-            <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
-            <div class="post-cats">
-            {{ range .Params.categories }}
-            <span class="post-cat">{{ . }}</span>
-            {{ end }}
-            </div>
-        </div>
+    <div class="filter-row">
+      <select id="filter-category" class="filter-select" aria-label="{{ T "category_label" }}">
+        <option value="">{{ T "all_categories" }}</option>
+        {{ range .Site.Taxonomies.categories.ByCount }}
+        <option value="{{ .Page.Title }}">{{ .Page.Title }} ({{ .Count }})</option>
         {{ end }}
-        </div>
-        {{ end }}
+      </select>
 
-      <div class="no-results" id="no-results">{{ T "no_results" }}</div>
+      <select id="filter-series" class="filter-select" aria-label="{{ T "series_label" }}">
+        <option value="">{{ T "all_series" }}</option>
+        {{ range .Site.Taxonomies.series.ByCount }}
+        <option value="{{ .Page.Title }}">{{ .Page.Title }} ({{ .Count }})</option>
+        {{ end }}
+      </select>
+
+      <select id="filter-year" class="filter-select" aria-label="{{ T "year_label" }}">
+        <option value="">{{ T "all_years" }}</option>
+        {{ range (.Site.RegularPages.GroupByDate "2006") }}
+        <option value="{{ .Key }}">{{ .Key }}</option>
+        {{ end }}
+      </select>
     </div>
 
-    <script>
-    (function() {
-      var i18n = {
-        category: '{{ T "category_label" }}',
-        series: '{{ T "series_label" }}',
-        year: '{{ T "year_label" }}',
-        of: '{{ T "posts_count" }}',
-        posts: '{{ T "posts_label" }}'
+    <div class="active-filters" id="active-filters"></div>
+    <div class="search-stats" id="search-stats"></div>
+  </div>
+
+  <div class="posts-section" id="posts-container">
+      {{ range (.Site.RegularPages.GroupByDate "January 2006") }}
+      {{- $parts := split .Key " " -}}
+      {{- $monthEn := index $parts 0 -}}
+      {{- $year := index $parts 1 -}}
+      
+      {{- $lang := $.Site.Language.Lang -}}
+      {{- $monthsPT := dict "January" "Janeiro" "February" "Fevereiro" "March" "Março" "April" "Abril" "May" "Maio" "June" "Junho" "July" "Julho" "August" "Agosto" "September" "Setembro" "October" "Outubro" "November" "Novembro" "December" "Dezembro" -}}
+      {{- $monthsES := dict "January" "Enero" "February" "Febrero" "March" "Marzo" "April" "Abril" "May" "Mayo" "June" "Junio" "July" "Julio" "August" "Agosto" "September" "Septiembre" "October" "Octubre" "November" "Noviembre" "December" "Diciembre" -}}
+      {{- $monthsFR := dict "January" "Janvier" "February" "Février" "March" "Mars" "April" "Avril" "May" "Mai" "June" "Juin" "July" "Juillet" "August" "Août" "September" "Septembre" "October" "Octobre" "November" "Novembre" "December" "Décembre" -}}
+      {{- $monthsDE := dict "January" "Januar" "February" "Februar" "March" "März" "April" "April" "May" "Mai" "June" "Juni" "July" "Juli" "August" "August" "September" "September" "October" "Oktober" "November" "November" "December" "Dezember" -}}
+      
+      {{- $monthName := $monthEn -}}
+      {{- if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthEn }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthEn }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthEn }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthEn }}{{ end -}}
+      
+      <div class="month-group" data-month="{{ .Key }}">
+      <h2 class="month-heading">{{ $monthName }} {{ $year }}</h2>
+      {{ range .Pages }}
+      <div class="post-item"
+          data-title="{{ .Title | lower }}"
+          data-categories="{{ range .Params.categories }}{{ . | lower }},{{ end }}"
+          data-series="{{ range .Params.series }}{{ . | lower }},{{ end }}"
+          data-year="{{ .Date.Format "2006" }}"
+          data-date="{{ .Date.Format "2006-01-02" }}">
+          <span class="post-day">{{ .Date.Format "02" }}</span>
+          <a href="{{ .RelPermalink }}" class="post-link">{{ .Title }}</a>
+          <div class="post-cats">
+          {{ range .Params.categories }}
+          <span class="post-cat">{{ . }}</span>
+          {{ end }}
+          </div>
+      </div>
+      {{ end }}
+      </div>
+      {{ end }}
+
+    <div class="no-results" id="no-results">{{ T "no_results" }}</div>
+  </div>
+
+  <script>
+  (function() {
+    var i18n = {
+      category: '{{ T "category_label" }}',
+      series: '{{ T "series_label" }}',
+      year: '{{ T "year_label" }}',
+      of: '{{ T "posts_count" }}',
+      posts: '{{ T "posts_label" }}'
+    };
+
+    var searchInput = document.getElementById('search-input');
+    var searchClear = document.getElementById('search-clear');
+    var filterCat   = document.getElementById('filter-category');
+    var filterSer   = document.getElementById('filter-series');
+    var filterYear  = document.getElementById('filter-year');
+    var statsEl     = document.getElementById('search-stats');
+    var noResults   = document.getElementById('no-results');
+    var activeFiltersEl = document.getElementById('active-filters');
+
+    var allPosts = Array.from(document.querySelectorAll('.post-item'));
+    var allGroups = Array.from(document.querySelectorAll('.month-group'));
+
+    function getFilters() {
+      return {
+        text: searchInput.value.trim().toLowerCase(),
+        category: filterCat.value.toLowerCase(),
+        series: filterSer.value.toLowerCase(),
+        year: filterYear.value
       };
+    }
 
-      var searchInput = document.getElementById('search-input');
-      var searchClear = document.getElementById('search-clear');
-      var filterCat   = document.getElementById('filter-category');
-      var filterSer   = document.getElementById('filter-series');
-      var filterYear  = document.getElementById('filter-year');
-      var statsEl     = document.getElementById('search-stats');
-      var noResults   = document.getElementById('no-results');
-      var activeFiltersEl = document.getElementById('active-filters');
+    function applyFilters() {
+      var f = getFilters();
+      var count = 0;
 
-      var allPosts = Array.from(document.querySelectorAll('.post-item'));
-      var allGroups = Array.from(document.querySelectorAll('.month-group'));
+      allPosts.forEach(function(post) {
+        var title = post.dataset.title || '';
+        var cats  = post.dataset.categories || '';
+        var sers  = post.dataset.series || '';
+        var year  = post.dataset.year || '';
 
-      function getFilters() {
-        return {
-          text: searchInput.value.trim().toLowerCase(),
-          category: filterCat.value.toLowerCase(),
-          series: filterSer.value.toLowerCase(),
-          year: filterYear.value
-        };
+        var ok = true;
+        if (f.text && !title.includes(f.text)) ok = false;
+        if (f.category && !cats.includes(f.category)) ok = false;
+        if (f.series && !sers.includes(f.series)) ok = false;
+        if (f.year && year !== f.year) ok = false;
+
+        post.dataset.hidden = ok ? 'false' : 'true';
+        if (ok) count++;
+      });
+
+      allGroups.forEach(function(group) {
+        var visible = group.querySelectorAll('.post-item:not([data-hidden="true"])').length > 0;
+        group.dataset.hidden = visible ? 'false' : 'true';
+      });
+
+      var total = allPosts.length;
+      if (f.text || f.category || f.series || f.year) {
+        statsEl.textContent = count + ' ' + i18n.of + ' ' + total + ' ' + i18n.posts;
+      } else {
+        statsEl.textContent = total + ' ' + i18n.posts;
       }
 
-      function applyFilters() {
-        var f = getFilters();
-        var count = 0;
+      noResults.classList.toggle('visible', count === 0);
+      searchClear.classList.toggle('visible', f.text.length > 0);
+      renderActiveTags(f);
+    }
 
-        allPosts.forEach(function(post) {
-          var title = post.dataset.title || '';
-          var cats  = post.dataset.categories || '';
-          var sers  = post.dataset.series || '';
-          var year  = post.dataset.year || '';
+    function renderActiveTags(f) {
+      activeFiltersEl.innerHTML = '';
+      if (f.category) addTag(i18n.category + ': ' + filterCat.options[filterCat.selectedIndex].text.replace(/ \(\d+\)/, ''), function() { filterCat.value = ''; applyFilters(); });
+      if (f.series)   addTag(i18n.series + ': ' + filterSer.options[filterSer.selectedIndex].text.replace(/ \(\d+\)/, ''), function() { filterSer.value = ''; applyFilters(); });
+      if (f.year)     addTag(i18n.year + ': ' + f.year, function() { filterYear.value = ''; applyFilters(); });
+    }
 
-          var ok = true;
-          if (f.text && !title.includes(f.text)) ok = false;
-          if (f.category && !cats.includes(f.category)) ok = false;
-          if (f.series && !sers.includes(f.series)) ok = false;
-          if (f.year && year !== f.year) ok = false;
+    function addTag(label, onRemove) {
+      var tag = document.createElement('span');
+      tag.className = 'filter-tag';
+      tag.innerHTML = label + '<button aria-label="Remover filtro">✕</button>';
+      tag.querySelector('button').addEventListener('click', onRemove);
+      activeFiltersEl.appendChild(tag);
+    }
 
-          post.dataset.hidden = ok ? 'false' : 'true';
-          if (ok) count++;
-        });
+    searchInput.addEventListener('input', applyFilters);
+    searchClear.addEventListener('click', function() { searchInput.value = ''; applyFilters(); searchInput.focus(); });
+    filterCat.addEventListener('change', applyFilters);
+    filterSer.addEventListener('change', applyFilters);
+    filterYear.addEventListener('change', applyFilters);
 
-        allGroups.forEach(function(group) {
-          var visible = group.querySelectorAll('.post-item:not([data-hidden="true"])').length > 0;
-          group.dataset.hidden = visible ? 'false' : 'true';
-        });
-
-        var total = allPosts.length;
-        if (f.text || f.category || f.series || f.year) {
-          statsEl.textContent = count + ' ' + i18n.of + ' ' + total + ' ' + i18n.posts;
-        } else {
-          statsEl.textContent = total + ' ' + i18n.posts;
-        }
-
-        noResults.classList.toggle('visible', count === 0);
-        searchClear.classList.toggle('visible', f.text.length > 0);
-        renderActiveTags(f);
-      }
-
-      function renderActiveTags(f) {
-        activeFiltersEl.innerHTML = '';
-        if (f.category) addTag(i18n.category + ': ' + filterCat.options[filterCat.selectedIndex].text.replace(/ \(\d+\)/, ''), function() { filterCat.value = ''; applyFilters(); });
-        if (f.series)   addTag(i18n.series + ': ' + filterSer.options[filterSer.selectedIndex].text.replace(/ \(\d+\)/, ''), function() { filterSer.value = ''; applyFilters(); });
-        if (f.year)     addTag(i18n.year + ': ' + f.year, function() { filterYear.value = ''; applyFilters(); });
-      }
-
-      function addTag(label, onRemove) {
-        var tag = document.createElement('span');
-        tag.className = 'filter-tag';
-        tag.innerHTML = label + '<button aria-label="Remover filtro">✕</button>';
-        tag.querySelector('button').addEventListener('click', onRemove);
-        activeFiltersEl.appendChild(tag);
-      }
-
-      searchInput.addEventListener('input', applyFilters);
-      searchClear.addEventListener('click', function() { searchInput.value = ''; applyFilters(); searchInput.focus(); });
-      filterCat.addEventListener('change', applyFilters);
-      filterSer.addEventListener('change', applyFilters);
-      filterYear.addEventListener('change', applyFilters);
-
-      applyFilters();
-    })();
-    </script>
-  </main>
-
-  {{ partial "footer.html" . }}
-</body>
-</html>
+    applyFilters();
+  })();
+  </script>
+{{ end }}
