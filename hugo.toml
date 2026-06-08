@@ -95,3 +95,6 @@ canonifyURLs = true
   category = "categories"
   tag = "tags"
   series = "series"
+
+[permalinks]
+  posts = "/posts/:slug/"
