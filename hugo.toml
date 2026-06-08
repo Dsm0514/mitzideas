@@ -22,6 +22,7 @@ canonifyURLs = true
     languageName = "Português"
     weight = 1
     title = "MitzIdeas"
+    contentDir = "content/pt-br"
     [languages."pt-br".params]
       description = "Blog de Davi Schmitz"
     [languages."pt-br".params.footer]
@@ -31,6 +32,7 @@ canonifyURLs = true
     languageName = "English"
     weight = 2
     title = "MitzIdeas"
+    contentDir = "content/en"
     [languages.en.params]
       description = "Davi Schmitz's blog"
     [languages.en.params.footer]
@@ -40,6 +42,7 @@ canonifyURLs = true
     languageName = "Español"
     weight = 3
     title = "MitzIdeas"
+    contentDir = "content/es"
     [languages.es.params]
       description = "Blog de Davi Schmitz"
     [languages.es.params.footer]
@@ -49,6 +52,7 @@ canonifyURLs = true
     languageName = "Français"
     weight = 4
     title = "MitzIdeas"
+    contentDir = "content/fr"
     [languages.fr.params]
       description = "Blog de Davi Schmitz"
     [languages.fr.params.footer]
@@ -58,6 +62,7 @@ canonifyURLs = true
     languageName = "Deutsch"
     weight = 5
     title = "MitzIdeas"
+    contentDir = "content/de"
     [languages.de.params]
       description = "Davi Schmitz Blog"
     [languages.de.params.footer]

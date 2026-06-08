@@ -1,10 +1,12 @@
 ---
 title: "Everything has a beginning"
+slug: "everything-has-a-beginning"
 date: 2026-05-14T10:00:00-03:00
 draft: false
 categories: ["Beginning"]
 series: []
 description: "The start of MitzIdeas."
+translationKey: "primeiro-post"
 ---
 
 Hello! My name is Davi Schmitz, I'm 21 years old (I intentionally published this first post on my birthday), I'm a Junior Developer currently working with the Django framework and a Computer Science student.

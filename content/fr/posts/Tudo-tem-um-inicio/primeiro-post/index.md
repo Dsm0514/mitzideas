@@ -1,10 +1,12 @@
 ---
 title: "Tout a un début"
+slug: "tout-a-un-debut"
 date: 2026-05-14T10:00:00-03:00
 draft: false
 categories: ["Début"]
 series: []
 description: "Le début de MitzIdeas."
+translationKey: "primeiro-post"
 ---
 
 Bonjour ! Je m'appelle Davi Schmitz, j'ai 21 ans (j'ai intentionnellement publié ce premier post le jour de mon anniversaire), je suis un développeur Junior qui travaille actuellement avec le framework Django et je suis étudiant en informatique.
