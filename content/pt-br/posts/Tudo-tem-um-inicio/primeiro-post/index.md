@@ -4,7 +4,7 @@ slug: "tudo-tem-um-inicio"
 date: 2026-05-14T10:00:00-03:00
 draft: false
 categories: ["Início"]
-series: []
+series: ["Tudo tem um início"]
 description: "O início do MitzIdeas."
 translationKey: "primeiro-post"
 ---

@@ -4,7 +4,7 @@ slug: "everything-has-a-beginning"
 date: 2026-05-14T10:00:00-03:00
 draft: false
 categories: ["Beginning"]
-series: []
+series: ["Everything has a beginning"]
 description: "The start of MitzIdeas."
 translationKey: "primeiro-post"
 ---

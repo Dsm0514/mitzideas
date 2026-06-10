@@ -467,11 +467,25 @@ a:hover { color: var(--accent-hover); }
 
 .no-results.visible { display: block; }
 
-/* ── Página de post ── */
-.post-header {
-  max-width: 720px;
+/* ── Layout da Página de Post (Com ToC Lateral) ── */
+.post-layout-container {
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 2rem;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 5rem;
+  padding: 0 1.5rem;
+}
+
+.post-main {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+}
+
+.post-header {
+  padding: 3rem 0 2rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 2rem;
 }
@@ -480,6 +494,13 @@ a:hover { color: var(--accent-hover); }
   font-size: 2rem;
   line-height: 1.25;
   margin-bottom: 1rem;
+}
+
+main > .post-header {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .post-meta {
@@ -495,9 +516,7 @@ a:hover { color: var(--accent-hover); }
 .post-meta-dot { color: var(--border-hover); }
 
 .post-content {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
+  padding: 0 0 4rem;
 }
 
 .post-content h2 { margin-top: 2.5rem; font-size: 1.4rem; }
@@ -523,7 +542,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .post-content pre {
-  background: var(--bg-secondary);
+  background: var(--bg-secondary) !important;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem;
@@ -532,11 +551,93 @@ a:hover { color: var(--accent-hover); }
 }
 
 .post-content pre code {
-  background: none;
+  background: none !important;
   border: none;
   padding: 0;
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   font-size: 0.875rem;
+}
+
+/* ── Remove as cores do syntax highlighting do Hugo APENAS no tema claro ── */
+html:not(.dark) .post-content pre code span {
+  color: var(--text-primary) !important;
+  background-color: transparent !important;
+}
+
+/* ── Table of Contents (Sumário Lateral Notion-style) ── */
+.post-toc {
+  width: 240px;
+  flex-shrink: 0;
+  display: none;
+  padding-top: 3rem;
+}
+
+.toc-sticky {
+  position: sticky;
+  top: 100px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-bottom: 2rem;
+  /* Oculta scrollbar no Firefox */
+  scrollbar-width: none; 
+  /* Oculta scrollbar no Internet Explorer e Edge antigos */
+  -ms-overflow-style: none; 
+}
+
+/* Oculta scrollbar no Chrome, Safari e Edge modernos (Webkit) */
+.toc-sticky::-webkit-scrollbar {
+  display: none;
+}
+
+.toc-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+#TableOfContents ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#TableOfContents > ul > li {
+  margin-bottom: 0.6rem;
+}
+
+/* Identação sutil para sub-tópicos com borda guia */
+#TableOfContents ul ul {
+  padding-left: 1rem;
+  margin-top: 0.4rem;
+  border-left: 1px solid var(--border);
+  margin-left: 0.2rem;
+}
+
+#TableOfContents a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: block;
+  line-height: 1.4;
+  transition: color 0.15s;
+}
+
+#TableOfContents a:hover {
+  color: var(--text-primary);
+}
+
+/* ── Responsividade ── */
+/* Mostrar o sumário apenas em telas maiores que 1024px (Laptops/Monitores) */
+@media (min-width: 1024px) {
+  .post-toc {
+    display: block;
+  }
 }
 
 /* ── Página Sobre ── */

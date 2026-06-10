@@ -4,7 +4,7 @@ slug: "tout-a-un-debut"
 date: 2026-05-14T10:00:00-03:00
 draft: false
 categories: ["Début"]
-series: []
+series: ["Tout a un début"]
 description: "Le début de MitzIdeas."
 translationKey: "primeiro-post"
 ---
