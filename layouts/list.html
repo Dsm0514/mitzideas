@@ -14,19 +14,20 @@
   </div>
 
   <div class="posts-section">
-    {{ range .Pages.GroupByDate "January 2006" }}
+    {{ range .Pages.GroupByDate "01 2006" }}
       {{- $parts := split .Key " " -}}
-      {{- $monthEn := index $parts 0 -}}
+      {{- $monthNum := index $parts 0 -}}
       {{- $year := index $parts 1 -}}
       {{- $lang := $.Site.Language.Lang -}}
       
-      {{- $monthsPT := dict "January" "Janeiro" "February" "Fevereiro" "March" "Março" "April" "Abril" "May" "Maio" "June" "Junho" "July" "Julho" "August" "Agosto" "September" "Setembro" "October" "Outubro" "November" "Novembro" "December" "Dezembro" -}}
-      {{- $monthsES := dict "January" "Enero" "February" "Febrero" "March" "Marzo" "April" "Abril" "May" "Mayo" "June" "Junio" "July" "Julio" "August" "Agosto" "September" "Septiembre" "October" "Octubre" "November" "Noviembre" "December" "Diciembre" -}}
-      {{- $monthsFR := dict "January" "Janvier" "February" "Février" "March" "Mars" "April" "Avril" "May" "Mai" "June" "Juin" "July" "Juillet" "August" "Août" "September" "Septembre" "October" "Octobre" "November" "Novembre" "December" "Décembre" -}}
-      {{- $monthsDE := dict "January" "Januar" "February" "Februar" "March" "März" "April" "April" "May" "Mai" "June" "Juni" "July" "Juli" "August" "August" "September" "September" "October" "Oktober" "November" "November" "December" "Dezember" -}}
+      {{- $monthsEN := dict "01" "January" "02" "February" "03" "March" "04" "April" "05" "May" "06" "June" "07" "July" "08" "August" "09" "September" "10" "October" "11" "November" "12" "December" -}}
+      {{- $monthsPT := dict "01" "Janeiro" "02" "Fevereiro" "03" "Março" "04" "Abril" "05" "Maio" "06" "Junho" "07" "Julho" "08" "Agosto" "09" "Setembro" "10" "Outubro" "11" "Novembro" "12" "Dezembro" -}}
+      {{- $monthsES := dict "01" "Enero" "02" "Febrero" "03" "Marzo" "04" "Abril" "05" "Mayo" "06" "Junio" "07" "Julio" "08" "Agosto" "09" "Septiembre" "10" "Octubre" "11" "Noviembre" "12" "Diciembre" -}}
+      {{- $monthsFR := dict "01" "Janvier" "02" "Février" "03" "Mars" "04" "Avril" "05" "Mai" "06" "Juin" "07" "Juillet" "08" "Août" "09" "Septembre" "10" "Octobre" "11" "Novembre" "12" "Décembre" -}}
+      {{- $monthsDE := dict "01" "Januar" "02" "Februar" "03" "März" "04" "April" "05" "Mai" "06" "Juni" "07" "Juli" "08" "August" "09" "September" "10" "Oktober" "11" "November" "12" "Dezember" -}}
       
-      {{- $monthName := $monthEn -}}
-      {{- if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthEn }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthEn }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthEn }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthEn }}{{ end -}}
+      {{- $monthName := $monthNum -}}
+      {{- if eq $lang "en" }}{{ $monthName = index $monthsEN $monthNum }}{{ else if eq $lang "pt-br" }}{{ $monthName = index $monthsPT $monthNum }}{{ else if eq $lang "es" }}{{ $monthName = index $monthsES $monthNum }}{{ else if eq $lang "fr" }}{{ $monthName = index $monthsFR $monthNum }}{{ else if eq $lang "de" }}{{ $monthName = index $monthsDE $monthNum }}{{ end -}}
 
       <div class="month-group">
         <h2 class="month-heading">{{ $monthName }} {{ $year }}</h2>
