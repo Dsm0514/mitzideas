@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T00:00:00-03:00",
+  "title": "Design System: MitzIdeas",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#F7F6F3", "tonalRamp": ["#FAFAF8", "#F7F6F3", "#EFEDE8"] },
+      "ink": { "role": "neutral", "displayName": "Soft Ink", "canonical": "#1C1B18", "tonalRamp": ["#1C1B18", "#5C5A54", "#9C9A93"] },
+      "moss": { "role": "primary", "displayName": "Quiet Moss", "canonical": "#3D6B5E", "tonalRamp": ["#2E5248", "#3D6B5E", "#6BAF9E", "#88C4B5"] },
+      "night": { "role": "neutral", "displayName": "Charcoal Night", "canonical": "#18181A", "tonalRamp": ["#18181A", "#1E1E21", "#222226", "#2E2E32"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Home Display", "purpose": "Identifica o blog na hero da página inicial." },
+      "headline": { "displayName": "Article Headline", "purpose": "Títulos de posts e páginas." },
+      "title": { "displayName": "Chronology Heading", "purpose": "Cabeçalhos de mês e seção." },
+      "body": { "displayName": "Reading Body", "purpose": "Prosa editorial e conteúdo longo." },
+      "label": { "displayName": "Interface Label", "purpose": "Navegação, filtros, datas e metadados." }
+    },
+    "shadows": [
+      { "name": "quiet", "value": "0 1px 3px rgba(0,0,0,0.06)", "purpose": "Campo de busca no tema claro." },
+      { "name": "floating", "value": "0 4px 12px rgba(0,0,0,0.08)", "purpose": "Dropdowns e imagens no tema claro." },
+      { "name": "focus", "value": "0 0 0 3px rgba(61, 107, 94, 0.12)", "purpose": "Foco do campo de busca no tema claro." }
+    ],
+    "motion": [
+      { "name": "standard", "value": "all 0.15s", "purpose": "Links, controles, campos e linhas da cronologia." },
+      { "name": "menu", "value": "all 0.1s", "purpose": "Opções dos dropdowns." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "640px" },
+      { "name": "very-compact", "value": "360px" },
+      { "name": "article-toc", "value": "1024px" }
+    ],
+    "narrative": {
+      "northStar": "O Caderno Calmo",
+      "rules": [
+        "O conteúdo conduz; a interface organiza sem competir.",
+        "O acento verde é raro e orientador.",
+        "Superfícies são planas por padrão; profundidade é funcional."
+      ],
+      "dos": [
+        "Reutilizar tokens e classes do CSS existente.",
+        "Separar a tipografia de leitura da tipografia de interface.",
+        "Manter claro e escuro como a mesma identidade, não dois produtos diferentes."
+      ],
+      "donts": [
+        "Não criar UI de dashboard, cards promocionais ou CTA dominante.",
+        "Não inventar estados sem uma necessidade de produto e correspondente no CSS.",
+        "Não usar cores puras ou saturadas fora da paleta."
+      ]
+    }
+  }
+}

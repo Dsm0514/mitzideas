@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Referência visual e comportamental do MitzIdeas.">
+  <title>Design System · MitzIdeas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <script>
+    (function() {
+      var stored = localStorage.getItem('mitz-theme');
+      var theme = stored || 'system';
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = theme === 'dark' || (theme === 'system' && prefersDark);
+      if (!stored) theme = 'dark';
+      if (isDark || !stored) document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="#inicio" class="header-brand">MitzIdeas</a>
+
+    <nav class="header-nav" aria-label="Seções deste design system">
+      <a href="#tipografia" class="header-link">Tipo</a>
+      <a href="#componentes" class="header-link">Componentes</a>
+      <div class="header-divider"></div>
+
+      <a href="DESIGN.md" class="header-icon-btn" title="Abrir regras para IA" aria-label="Abrir regras para IA">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+
+      <div class="theme-selector">
+        <button id="theme-btn" class="header-icon-btn" title="Tema" aria-label="Selecionar tema">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <div class="theme-option" data-theme="light" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+            Claro
+          </div>
+          <div class="theme-option" data-theme="dark" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            Escuro
+          </div>
+          <div class="theme-option" data-theme="system" role="button" tabindex="0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Sistema
+          </div>
+        </div>
+      </div>
+
+      <a href="#layout" class="header-icon-btn lang-btn" title="Layout" aria-label="Ir para layout">DS</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <div class="home-hero">
+      <h1>MitzIdeas</h1>
+      <p>Design System · referência viva da identidade editorial</p>
+    </div>
+
+    <div class="search-section">
+      <div class="search-bar">
+        <span class="search-bar-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input type="text" value="" placeholder="Buscar componentes..." aria-label="Buscar componentes" autofocus>
+        <button class="search-clear visible" aria-label="Limpar busca">✕</button>
+      </div>
+      <div class="filter-row">
+        <select class="filter-select" aria-label="Navegar por tema">
+          <option>Identidade</option>
+          <option>Claro</option>
+          <option>Escuro</option>
+        </select>
+        <select class="filter-select" aria-label="Navegar por componente">
+          <option>Todos os componentes</option>
+          <option>Navegação</option>
+          <option>Conteúdo</option>
+        </select>
+      </div>
+      <div class="active-filters">
+        <span class="filter-tag">Referência atual <button aria-label="Remover filtro de exemplo">✕</button></span>
+      </div>
+      <div class="search-stats">Use os controles reais: foco, hover e clique revelam os estados definidos no CSS.</div>
+    </div>
+
+    <div class="posts-section">
+      <section id="identidade" class="month-group">
+        <h2 class="month-heading">Identidade</h2>
+        <div class="post-content">
+          <p>O MitzIdeas é um <strong>caderno pessoal calmo</strong>: uma interface mínima para leitura e memória. O conteúdo conduz; a interface organiza com tipografia, espaço e linhas suaves.</p>
+          <blockquote>Use este catálogo e o arquivo <code>DESIGN.md</code> antes de criar uma nova tela. Eles descrevem somente padrões que o projeto já possui.</blockquote>
+          <p><a href="#cores">O acento verde-musgo</a> aponta para links, foco e detalhes de navegação. Ele não é um fundo dominante nem uma chamada promocional.</p>
+        </div>
+      </section>
+
+      <section id="cores" class="month-group">
+        <h2 class="month-heading">Cores e superfícies</h2>
+        <div class="post-content">
+          <h3>Tema claro</h3>
+          <div class="post-item">
+            <span class="post-day">BG</span>
+            <span class="post-link">Paper · #F7F6F3: fundo principal</span>
+            <div class="post-cats"><span class="post-cat">--bg-primary</span></div>
+          </div>
+          <div class="post-item">
+            <span class="post-day">UI</span>
+            <span class="post-link">Surface · #FAFAF8: campos e dropdowns</span>
+            <div class="post-cats"><span class="post-cat">--bg-card</span></div>
+          </div>
+          <div class="post-item">
+            <span class="post-day">TXT</span>
+            <span class="post-link">Soft Ink · #1C1B18: títulos e corpo</span>
+            <div class="post-cats"><span class="post-cat">--text-primary</span></div>
+          </div>
+          <div class="post-item">
+            <span class="post-day">ACC</span>
+            <a href="#componentes" class="post-link">Quiet Moss · #3D6B5E: link, foco e orientação</a>
+            <div class="post-cats"><span class="post-cat">--accent</span></div>
+          </div>
+          <div class="post-item">
+            <span class="post-day">TAG</span>
+            <span class="post-link">Tag Surface · #E8E5DE com Tag Ink · #4A4840</span>
+            <div class="post-cats"><span class="post-cat">pill</span></div>
+          </div>
+          <h3>Tema escuro</h3>
+          <p>Abra o seletor de tema no cabeçalho e escolha <em>Claro</em>, <em>Escuro</em> ou <em>Sistema</em>. O tema real alterna as mesmas variáveis: carvão (<code>#18181A</code>) no fundo, tinta suave (<code>#E8E6E0</code>) no texto e menta (<code>#6BAF9E</code>) no acento.</p>
+          <p><small>Profundidade: linhas de 1px e superfícies tonais vêm antes de sombra. A sombra pequena é usada no campo de busca; a média, em imagem e menu flutuante.</small></p>
+        </div>
+      </section>
+
+      <section id="tipografia" class="month-group">
+        <h2 class="month-heading">Tipografia</h2>
+        <div class="post-content">
+          <h1>MitzIdeas: título de home</h1>
+          <p><small>DM Sans · 700 · 2.5rem · tracking −0.04em. Em telas até 640px: 1.75rem.</small></p>
+          <h2>Um título de seção para leitura longa</h2>
+          <p><small>DM Sans · 600 · 1.4rem. Títulos de artigo usam 2rem com line-height 1.25.</small></p>
+          <h3>Subtítulo editorial</h3>
+          <p><small>DM Sans · 600 · 1.15rem.</small></p>
+          <p>Este é o corpo editorial em Lora, Georgia, serif, a <strong>16px</strong> com altura de linha <strong>1.7</strong>. É a voz visual de uma ideia explicada com calma; não substitua por texto de interface.</p>
+          <p><small>Metadados, labels e navegação usam DM Sans entre 0.7rem e 0.875rem. Exemplo: 09 · Junho 2026 · Início.</small></p>
+          <p><code>código inline</code> preserva a mesma linguagem suave de borda, fundo secundário e acento.</p>
+          <pre><code>hugo server
+hugo --gc --minify</code></pre>
+        </div>
+      </section>
+
+      <section id="navegacao" class="month-group">
+        <h2 class="month-heading">Navegação e controles</h2>
+        <div class="post-content">
+          <h3>Links do cabeçalho</h3>
+          <p>O link textual usa DM Sans 500, padding de <code>0.4rem 0.75rem</code> e raio de 5px. Passe o mouse: o fundo vira secundário e o texto fica primário.</p>
+          <div class="header-nav">
+            <a href="#componentes" class="header-link">Exemplo de link</a>
+            <div class="header-divider"></div>
+            <button class="header-icon-btn" title="Exemplo de ícone" aria-label="Exemplo de ícone"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></button>
+          </div>
+          <h3>Dropdown de tema aberto</h3>
+          <p><small>O menu flutuante usa fundo de componente, borda, raio de 8px, padding de 0.375rem e sombra média. A opção ativa e o hover têm o mesmo tratamento visual.</small></p>
+          <div class="theme-selector">
+            <div class="theme-dropdown open">
+              <div class="theme-option active">Escuro</div>
+              <div class="theme-option">Claro</div>
+              <div class="theme-option">Sistema</div>
+            </div>
+          </div>
+          <h3>Seletor de idioma aberto</h3>
+          <div class="lang-selector">
+            <div class="lang-dropdown open">
+              <a href="#navegacao" class="lang-option active">Português <span class="lang-check">✓</span></a>
+              <a href="#navegacao" class="lang-option">English <span class="lang-check">✓</span></a>
+              <a href="#navegacao" class="lang-option">Español <span class="lang-check">✓</span></a>
+              <a href="#navegacao" class="lang-option">Français <span class="lang-check">✓</span></a>
+              <a href="#navegacao" class="lang-option">Deutsch <span class="lang-check">✓</span></a>
+            </div>
+          </div>
+          <p><small>O projeto não declara estilo customizado de <code>:active</code>, disabled, loading ou erro para links e ícones. Durante o clique, esses controles usam o comportamento nativo do navegador; não invente uma variante visual como se ela existisse.</small></p>
+        </div>
+      </section>
+
+      <section id="componentes" class="month-group">
+        <h2 class="month-heading">Busca, filtros e tags</h2>
+        <div class="post-content">
+          <h3>Campo de busca</h3>
+          <p>DM Sans 0.9rem, superfície de componente, borda de 1px, raio de 8px e sombra pequena. O foco remove outline, muda a borda para o acento e acrescenta um halo de 3px.</p>
+          <div class="search-bar">
+            <span class="search-bar-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input type="text" placeholder="Buscar posts..." aria-label="Exemplo de busca">
+          </div>
+          <h3>Filtros compactos</h3>
+          <div class="filter-row">
+            <select class="filter-select" aria-label="Categoria"><option>Todas as categorias</option><option>Início</option></select>
+            <select class="filter-select" aria-label="Série"><option>Todas as séries</option><option>Tudo tem um início</option></select>
+            <select class="filter-select" aria-label="Ano"><option>Todos os anos</option><option>2026</option></select>
+          </div>
+          <p><small>Foco de select altera apenas a borda. Em até 640px, a fileira vira uma coluna. Não há estado visual customizado de erro, sucesso, leitura ou disabled.</small></p>
+          <h3>Tags e remoção</h3>
+          <div class="active-filters">
+            <span class="filter-tag">Categoria: Início <button aria-label="Remover">✕</button></span>
+            <span class="filter-tag">Série: Tudo tem um início <button aria-label="Remover">✕</button></span>
+          </div>
+          <p><small>Tags têm formato pill. O botão interno não possui fundo e muda apenas a cor no hover.</small></p>
+        </div>
+      </section>
+
+      <section id="conteudo" class="month-group">
+        <h2 class="month-heading">Cronologia e conteúdo de post</h2>
+        <div class="post-content">
+          <h3>Listagem mensal</h3>
+          <div class="month-group">
+            <h2 class="month-heading">Junho 2026</h2>
+            <div class="post-item">
+              <span class="post-day">09</span>
+              <a href="#conteudo" class="post-link">Tudo tem um início: Parte 2</a>
+              <div class="post-cats"><span class="post-cat">Início</span></div>
+            </div>
+            <div class="post-item">
+              <span class="post-day">14</span>
+              <a href="#conteudo" class="post-link">Tudo tem um início</a>
+              <div class="post-cats"><span class="post-cat">Início</span></div>
+            </div>
+          </div>
+          <p><small>Passe o mouse sobre as linhas: elas se expandem lateralmente, recebem fundo secundário e raio pequeno. Em até 640px, as categorias desaparecem para priorizar título e data.</small></p>
+          <h3>Estado vazio</h3>
+          <div class="no-results visible">Nenhum post encontrado para essa busca.</div>
+          <h3>Metadados e retorno</h3>
+          <a href="#inicio" class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Voltar</a>
+          <div class="post-meta">
+            <time datetime="2026-06-09">09 de junho de 2026</time>
+            <span class="post-meta-dot">·</span>
+            <a href="#conteudo">Início</a>
+            <span class="post-meta-dot">·</span>
+            <a href="#conteudo">Tudo tem um início</a>
+          </div>
+          <h3>Citação, imagem e código</h3>
+          <blockquote>Uma citação é uma superfície secundária, com borda esquerda de 3px em verde-musgo. Ela não recebe card, ícone ou sombra.</blockquote>
+          <img src="content/pt-br/posts/Tudo-tem-um-inicio/primeiro-post/MitzIdeasHome.png" alt="Primeira versão da página inicial do MitzIdeas">
+          <p><small>As imagens de post têm largura máxima de 100%, raio de 8px e sombra média.</small></p>
+          <pre><code>---
+title: "Tudo tem um início"
+slug: "tudo-tem-um-inicio"
+draft: false
+translationKey: "primeiro-post"
+---</code></pre>
+        </div>
+      </section>
+
+      <section id="layout" class="month-group">
+        <h2 class="month-heading">Layout e responsividade</h2>
+        <div class="post-content">
+          <h3>Home e páginas simples</h3>
+          <p>A home combina uma hero central e colunas de até 760px para busca e listagem. A página Sobre usa 680px. O rodapé é apenas um divisor e texto secundário centralizado.</p>
+          <h3>Artigo e sumário</h3>
+          <div class="post-layout-container">
+            <article class="post-main">
+              <div class="post-header">
+                <a href="#inicio" class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Voltar</a>
+                <h1>Título de artigo em uma coluna de leitura</h1>
+                <div class="post-meta">09 de junho de 2026 <span class="post-meta-dot">·</span> Início</div>
+              </div>
+              <div class="post-content">
+                <p>A coluna principal tem no máximo 720px. O container completo chega a 1140px e separa a leitura do sumário por 5rem.</p>
+              </div>
+            </article>
+            <aside class="post-toc">
+              <div class="toc-sticky">
+                <span class="toc-title">Neste Post</span>
+                <nav id="TableOfContents" aria-label="Sumário de exemplo">
+                  <ul><li><a href="#layout">Estrutura do artigo</a><ul><li><a href="#layout">Coluna principal</a></li></ul></li><li><a href="#inicio">Voltar ao início</a></li></ul>
+                </nav>
+              </div>
+            </aside>
+          </div>
+          <p><small>O sumário só é visível a partir de 1024px. A 640px, filtros empilham e a hero encolhe; a 360px, “Sobre” some do cabeçalho.</small></p>
+        </div>
+      </section>
+
+      <section id="regras" class="month-group">
+        <h2 class="month-heading">Regras de continuidade</h2>
+        <div class="post-content">
+          <p><strong>Faça:</strong> reutilize as variáveis e classes já presentes, preserve Lora para a prosa e DM Sans para a interface, mantenha a leitura em coluna contida e ofereça hover/focus discreto para controles que realmente existam.</p>
+          <p><strong>Não faça:</strong> não introduza branco/preto puro, gradientes, UI de dashboard, CTAs dominantes, cards em toda seção, fontes novas ou estados de erro/loading/desabilitado inexistentes.</p>
+          <p>Para implementação e decisões de sistema, leia <a href="DESIGN.md">DESIGN.md</a>. Para estrutura, conteúdo, traduções, ambiente local e deploy, leia <a href="PROJECT_CONTEXT.md">PROJECT_CONTEXT.md</a>.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">MitzIdeas · Design System de referência</footer>
+
+  <script>
+    var themeBtn = document.getElementById('theme-btn');
+    var themeDropdown = document.getElementById('theme-dropdown');
+    var currentTheme = localStorage.getItem('mitz-theme') || 'dark';
+
+    function applyTheme(theme) {
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = theme === 'dark' || (theme === 'system' && prefersDark);
+      document.documentElement.classList.toggle('dark', isDark);
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('mitz-theme', theme);
+      currentTheme = theme;
+      updateThemeUI();
+    }
+
+    function updateThemeUI() {
+      document.querySelectorAll('#theme-dropdown .theme-option').forEach(function(option) {
+        option.classList.toggle('active', option.dataset.theme === currentTheme);
+      });
+    }
+
+    themeBtn.addEventListener('click', function(event) {
+      event.stopPropagation();
+      themeDropdown.classList.toggle('open');
+    });
+
+    document.querySelectorAll('#theme-dropdown .theme-option').forEach(function(option) {
+      option.addEventListener('click', function() {
+        applyTheme(this.dataset.theme);
+        themeDropdown.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', function() {
+      themeDropdown.classList.remove('open');
+    });
+
+    updateThemeUI();
+  </script>
+</body>
+</html>

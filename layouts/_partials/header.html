@@ -1,5 +1,8 @@
 <header class="site-header">
-  <a href="{{ .Site.BaseURL }}" class="header-brand">{{ .Site.Title }}</a>
+  <a href="{{ .Site.Home.RelPermalink }}" class="header-brand" aria-label="{{ .Site.Title }}">
+    <img class="brand-logo brand-logo--light" src="{{ "images/logos/mitzideas-navbar-light.svg" | relURL }}" alt="" width="120" height="32">
+    <img class="brand-logo brand-logo--dark" src="{{ "images/logos/mitzideas-navbar-dark.svg" | relURL }}" alt="" width="120" height="32">
+  </a>
 
   <nav class="header-nav">
     <a href="{{ "about/" | relLangURL }}" class="header-link">{{ T "about" }}</a>

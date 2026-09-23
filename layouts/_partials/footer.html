@@ -1,3 +1,9 @@
 <footer class="site-footer">
-  {{ .Site.Params.footer.copyright }}
+  <div class="site-footer__inner">
+    <a href="{{ .Site.Home.RelPermalink }}" class="footer-brand" aria-label="{{ .Site.Title }}">
+      <img class="footer-logo footer-logo--light" src="{{ "images/logos/mitzideas-footer-light.svg" | relURL }}" alt="" width="162" height="38">
+      <img class="footer-logo footer-logo--dark" src="{{ "images/logos/mitzideas-footer-dark.svg" | relURL }}" alt="" width="162" height="38">
+    </a>
+    <span class="site-footer__copyright">{{ .Site.Params.footer.copyright }}</span>
+  </div>
 </footer>
